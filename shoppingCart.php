@@ -1,24 +1,18 @@
 <?php
 session_start();
-
-//---------THIS IS BROKEN!!!!!!!
+    
 function displayCart() {
     include 'dbConnections.php';
     $conn = getDatabaseConnection();
-
-    $sql = "SELECT * FROM gp2_game a JOIN gp2_published name = :name";
-    
-    $namedParam = array(":name"=>$_SESSION['cart']);
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->execute($namedParam);
-    $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    foreach ($records as $record) {
-        echo "Name: ". $record['name'];
+    $array = $_SESSION['vgID'];
+    foreach($array as $a){
+        $sql = "SELECT * FROM gp2_game WHERE vgID = $a";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $records = $stmt->fetch(PDO::FETCH_ASSOC);
+        echo "Name: ". $records['name'] . "     Price: ". $records['price'] . "<br/><br/>";
+        }
     }
-}
-
 ?>
 
 <!DOCTYPE html>

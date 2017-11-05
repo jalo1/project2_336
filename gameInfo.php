@@ -16,7 +16,12 @@ function displayGameInfo() {
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     foreach ($records as $record) {
-        echo "Name: ". $record['name'] ."<br/>Year: ".  $record['year'] . "<br/>Console: " . $record['console'] . "<br/>MetaCritic Score: " . $record['metacritic'] . "<br/>Publisher: " . $record['publisher']. "<br/>";
+        echo "Name: ". $record['name'] .
+        "<br/>Price: ". $record['price'].
+        "<br/>Year: ".  $record['year'] . 
+        "<br/>Console: " . $record['console'] . 
+        "<br/>MetaCritic Score: " . $record['metacritic'] . 
+        "<br/>Publisher: " . $record['publisher']. "<br/>";
     }
     
 }

@@ -11,8 +11,8 @@ $stmt->execute($namedParam);
 $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
 foreach ($records as $record) {
-    array_push($_SESSION['cart'],$record['name']);
+    array_push($_SESSION['vgID'],$record['vgID']);
 }
-print_r($_SESSION['cart']);
+print_r($_SESSION['vgID']);
 header("Location: index.php");
 ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
-    if (!isset($_SESSION['cart']) && empty($_SESSION['cart'])) {
-        $_SESSION['cart'] = array();
+    if (!isset($_SESSION['vgID']) && empty($_SESSION['vgID'])) {
+        $_SESSION['vgID'] = array();
     }
 
     include 'dbConnections.php';
@@ -34,7 +34,6 @@ session_start();
         <?php
         
         $games = displayGames();
-        
         foreach($games as $g) {
             echo  "<a href='gameInfo.php?vgID=".$g['vgID']."'> ".$g['name']." </a>";
             echo "<form action='addToCart.php' style='display:inline'>
@@ -44,7 +43,6 @@ session_start();
             echo "<br />";
         }
         
-        //print_r($_SESSION['cart']);
         ?>
         
         <form action='shoppingCart.php'>
