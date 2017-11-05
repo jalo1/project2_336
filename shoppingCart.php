@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-
+//---------THIS IS BROKEN!!!!!!!
 function displayCart() {
     include 'dbConnections.php';
     $conn = getDatabaseConnection();
