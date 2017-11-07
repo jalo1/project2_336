@@ -7,7 +7,11 @@ function displayGameInfo() {
     include 'dbConnections.php';
     $conn = getDatabaseConnection();
 
-    $sql = "SELECT * FROM gp2_game a JOIN gp2_published b ON a.vgID = b.vgID WHERE a.vgID = :vgId";
+    $sql = "SELECT * 
+            FROM gp2_game a 
+            JOIN gp2_published b 
+            ON a.vgID = b.vgID 
+            WHERE a.vgID = :vgId";
     
     $namedParam = array(":vgId"=>$_GET['vgID']);
     
