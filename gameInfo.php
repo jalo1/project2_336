@@ -40,5 +40,9 @@ function displayGameInfo() {
     <body>
         <h2> Game Information </h2>
         <?=displayGameInfo()?>
+        
+        <form action='index.php'>
+                <input type='submit' value='Back'>
+        </form>
     </body>
 </html>
