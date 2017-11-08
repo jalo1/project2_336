@@ -6,7 +6,7 @@ function displayCart() {
     $conn = getDatabaseConnection();
     $array = $_SESSION['vgID'];
     
-    
+    echo "<div id = 'tables'>";
     echo "<table>";
     echo "<tr>";
     echo "<th>Game</th>";
@@ -31,6 +31,7 @@ function displayCart() {
         echo "</tr>";
     }
     echo "</table>";
+    echo "</div>";
 }
     
 ?>
@@ -40,16 +41,37 @@ function displayCart() {
     <head>
         <title> Shopping Cart </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+          <link href="css/styles.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <h2> Shopping Cart </h2>
+      
+       <div id = 'wrapper'>
+         <div id = 'luigi'>  
+            
+            
+            <a href="https://fontmeme.com/new-super-mario-bros-wii-font/"><img src="https://fontmeme.com/permalink/171108/374b98e378c31fd172deb648b5888210.png" alt="new-super-mario-bros-wii-font" border="0"></a>
+      </div>
+      
+       <br></br>
         <?=displayCart()?>
         
+        
+        
+        
+       <div id = "back"> 
         <form action ='clear.php'>
-            <input type='submit' value = 'Clear'>
+            <input type='submit' class = 'button' value = 'Clear'>
        </form>
+       
+       
+       <br></br>
         <form action='back.php'>
-                <input type='submit' value='Back'>
+                <input type='submit' class = 'button' value='Back'>
         </form>
+        </div>
+        
+        
+        </div>
+        
     </body>
 </html>

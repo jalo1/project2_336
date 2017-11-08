@@ -34,8 +34,12 @@ function displayGameInfo() {
         <link href="css/styles.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <h2> Game Information </h2>
-
+    <div id = 'wrapper'>  
+    <div id = 'wario'>
+<a href="https://fontmeme.com/new-super-mario-bros-wii-font/"><img src="https://fontmeme.com/permalink/171108/341f4fc0740c7b6afe8a02e2eb569c70.png" alt="new-super-mario-bros-wii-font" border="0"></a>
+   </div>
+   <br></br>
+    <div id = "table">
          <?php
         $games = displayGameInfo();
          foreach($games as $g) {
@@ -66,14 +70,16 @@ function displayGameInfo() {
         echo "</table>";
         echo "</div>";
         ?>
+        </div>
         
-        
-        <form action='index.php'>
-
-      
+      </br>
+        <div id = "back">
         <form action='back.php'>
 
-                <input type='submit' value='Back'>
+                <input type='submit' class = 'button' value='Back'>
         </form>
+        </div>
+        
+        </div>
     </body>
 </html>

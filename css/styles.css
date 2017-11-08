@@ -24,6 +24,11 @@ transition-duration: 0.4s;
  color:#008CBA;
 }
 
+#back
+{
+    margin-left: 420px;
+}
+
 .button:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
@@ -42,6 +47,12 @@ transition-duration: 0.4s;
  margin-left:250px ;   
 }
 
+#wario
+{
+    margin-left: 225px;
+}
+
+
 #wrapper
 {
     width: 1000px;
@@ -56,6 +67,21 @@ transition-duration: 0.4s;
 	
 	border-style: solid;
 	 border-width: 5px;
+}
+
+#luigi
+{
+    margin-left: 275px;
+}
+
+#tables
+{
+    margin-left: 350px;
+}
+
+#table
+{
+    margin-left: 150px;
 }
 
 body 

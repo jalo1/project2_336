@@ -87,7 +87,12 @@ session_start();
         <div id = 'sButton'> 
         <form action='shoppingCart.php'>
                 <input type='submit' class = 'button' value='Shopping Cart'>
+                
         </form>
+          <form action='refresh.php'>
+                <input type='submit' class = 'button' value='Start New Session'>
+        </form>
+        
         </div>
         
         <div id = 'upper'>
@@ -117,7 +122,7 @@ session_start();
  
         <?php
         $games = displayGames();
-        echo "<div id = 'table'>";
+     
         echo "<table>";
         echo "<tr>
                 <th>Game</th>
@@ -146,20 +151,11 @@ session_start();
         }
         
         echo "</table>";
-        echo "</div>";
+       
         ?>
         
 
        
-        </div>
-        <form action='shoppingCart.php'>
-                <input type='submit' value='Shopping Cart'>
-        </form>
-        
-        <form action='refresh.php'>
-                <input type='submit' value='Start New Session'>
-        </form>
-        
         
         
 
