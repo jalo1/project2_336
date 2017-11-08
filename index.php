@@ -2,10 +2,15 @@
 session_start();
     if (!isset($_SESSION['vgID']) && empty($_SESSION['vgID'])) {
         $_SESSION['vgID'] = array();
+        $_SESSION['sortBy']="";
+        $_SESSION['filter']="";
+        $_SESSIOn['submit']="";
     }
 
     include 'dbConnections.php';
     $conn = getDatabaseConnection();
+    
+    
     
     function displayGames() {
         global $conn;
@@ -14,26 +19,42 @@ session_start();
                 ON pub.vgID=game.vgID
                 JOIN gp2_developer dev 
                 ON pub.sID = dev.dID";
-                
+
         if (isset($_GET['submit'])){
             
-            if ($_GET['sortBy']=="asc"){
-                $sql .= " ORDER BY price";
-            }
-            else if ($_GET['sortBy']=="desc") {
-                $sql .= " ORDER BY game.price DESC";
-            }
+            $_SESSION['submit']="submit=Search";
             
-            else if (isset($_GET['filter'])) {
+            if (!empty($_GET['filter'])) {
                 if ($_GET['filter'] == "console"){
                     $sql .= " ORDER BY game.console";
+                    $_SESSION['filter']="filter=console";
                 }
                 if ($_GET['filter'] == "developer"){
                     $sql .= " ORDER BY dev.developer";
+                    $_SESSION['filter']="filter=developer";
                 }
                 if ($_GET['filter'] == "publisher"){
                     $sql .= " ORDER BY pub.publisher";
+                    $_SESSION['filter']="filter=publisher";
                 }
+                
+                if ($_GET['sortBy'] == "asc"){
+                    $sql .= ", price";
+                    $_SESSION['sortBy']="sortBy=asc";
+                }
+                if ($_GET['sortBy'] == "desc"){
+                    $sql .= ", price DESC";
+                    $_SESSION['sortBy']="sortBy=desc";
+                }
+            }
+            
+            else if ($_GET['sortBy']=="asc"){
+                $sql .= " ORDER BY game.price";
+                $_SESSION['sortBy']="sortBy=asc";
+            }
+            else if ($_GET['sortBy']=="desc") {
+                $sql .= " ORDER BY price DESC";
+                $_SESSION['sortBy']="sortBy=desc";
             }
             else {
                 $sql .= " ORDER BY name";
@@ -42,7 +63,6 @@ session_start();
         else {
             $sql .= " ORDER BY name";
         }
-            
         $statement = $conn->prepare($sql);
         $statement->execute();
         $games = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -83,11 +103,11 @@ session_start();
              <label for="desc">Decending</label>
             </br>
             Filter by: 
-            <select name="filter">
+            <select id=filter name="filter">
                 <option value=""> Select One </option>
-                <option value="console">Console</option>
-                <option value="developer">Developer</option>
-                <option value="publisher">Publisher</option>
+                <option value="console"  <?php if ($_GET['filter'] == "console" ) echo 'selected' ; ?>>Console</option>
+                <option value="publisher"  <?php if ($_GET['filter'] == "publisher" ) echo 'selected' ; ?>>Publisher</option>
+                <option value="developer" <?php if ($_GET['filter'] == "developer" ) echo 'selected' ; ?>>Developer</option>
             </select>
              
             <input type="submit" class = "button" value="Search" name="submit" />
@@ -129,7 +149,19 @@ session_start();
         echo "</div>";
         ?>
         
+
        
         </div>
+        <form action='shoppingCart.php'>
+                <input type='submit' value='Shopping Cart'>
+        </form>
+        
+        <form action='refresh.php'>
+                <input type='submit' value='Start New Session'>
+        </form>
+        
+        
+        
+
     </body>
 </html>
