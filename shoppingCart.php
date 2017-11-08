@@ -12,6 +12,13 @@ function displayCart() {
     echo "<th>Game</th>";
     echo "<th>Price</th>";
     echo "</tr>";
+    
+    if (empty($array)){
+        echo "<tr>";
+        echo "<td> (empty) </td>";
+        echo "<td> (empty) </td>";
+        echo "</tr>";
+    }
           
     foreach($array as $a){
         $sql = "SELECT * FROM gp2_game WHERE vgID = $a";
