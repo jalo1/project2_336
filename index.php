@@ -19,29 +19,12 @@ session_start();
                 ON pub.vgID=game.vgID
                 JOIN gp2_developer dev 
                 ON pub.sID = dev.dID";
-                
-<<<<<<< HEAD
-        if (($_GET['submit'])){
-            
-            if (!empty($_GET['filter'])) {
-=======
-        
-                
+
         if (isset($_GET['submit'])){
             
             $_SESSION['submit']="submit=Search";
             
-            if ($_GET['sortBy']=="asc"){
-                $sql .= " ORDER BY price";
-                $_SESSION['sortBy']="sortBy=asc";
-            }
-            else if ($_GET['sortBy']=="desc") {
-                $sql .= " ORDER BY game.price DESC";
-                $_SESSION['sortBy']="sortBy=desc";
-            }
-            
-            else if (isset($_GET['filter'])) {
->>>>>>> refs/remotes/origin/master
+            if (!empty($_GET['filter'])) {
                 if ($_GET['filter'] == "console"){
                     $sql .= " ORDER BY game.console";
                     $_SESSION['filter']="filter=console";
@@ -57,19 +40,22 @@ session_start();
                 
                 if ($_GET['sortBy'] == "asc"){
                     $sql .= ", price";
+                    $_SESSION['sortBy']="sortBy=asc";
                 }
                 if ($_GET['sortBy'] == "desc"){
                     $sql .= ", price DESC";
+                    $_SESSION['sortBy']="sortBy=desc";
                 }
             }
             
             else if ($_GET['sortBy']=="asc"){
                 $sql .= " ORDER BY game.price";
+                $_SESSION['sortBy']="sortBy=asc";
             }
             else if ($_GET['sortBy']=="desc") {
                 $sql .= " ORDER BY price DESC";
+                $_SESSION['sortBy']="sortBy=desc";
             }
-            
             else {
                 $sql .= " ORDER BY name";
             }
