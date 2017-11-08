@@ -14,5 +14,5 @@ foreach ($records as $record) {
     array_push($_SESSION['vgID'],$record['vgID']);
 }
 print_r($_SESSION['vgID']);
-header("Location: index.php");
+header("Location: index.php?".$_SESSION['sortBy']."&".$_SESSION['filter']."&" .$_SESSION['submit']);
 ?>

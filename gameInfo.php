@@ -1,12 +1,9 @@
 <?php
 session_start();
-
-
 function displayGameInfo() {
     
     include 'dbConnections.php';
     $conn = getDatabaseConnection();
-
     $sql = "SELECT * 
             FROM gp2_game g 
             JOIN gp2_published p 
@@ -34,7 +31,6 @@ function displayGameInfo() {
     }
     
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +41,7 @@ function displayGameInfo() {
     <body>
         <h2> Game Information </h2>
         <?=displayGameInfo()?>
-        <form action='index.php'>
+        <form action='back.php'>
                 <input type='submit' value='Back'>
         </form>
     </body>

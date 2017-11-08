@@ -2,10 +2,15 @@
 session_start();
     if (!isset($_SESSION['vgID']) && empty($_SESSION['vgID'])) {
         $_SESSION['vgID'] = array();
+        $_SESSION['sortBy']="";
+        $_SESSION['filter']="";
+        $_SESSIOn['submit']="";
     }
 
     include 'dbConnections.php';
     $conn = getDatabaseConnection();
+    
+    
     
     function displayGames() {
         global $conn;
@@ -15,17 +20,39 @@ session_start();
                 JOIN gp2_developer dev 
                 ON pub.sID = dev.dID";
                 
+<<<<<<< HEAD
         if (($_GET['submit'])){
             
             if (!empty($_GET['filter'])) {
+=======
+        
+                
+        if (isset($_GET['submit'])){
+            
+            $_SESSION['submit']="submit=Search";
+            
+            if ($_GET['sortBy']=="asc"){
+                $sql .= " ORDER BY price";
+                $_SESSION['sortBy']="sortBy=asc";
+            }
+            else if ($_GET['sortBy']=="desc") {
+                $sql .= " ORDER BY game.price DESC";
+                $_SESSION['sortBy']="sortBy=desc";
+            }
+            
+            else if (isset($_GET['filter'])) {
+>>>>>>> refs/remotes/origin/master
                 if ($_GET['filter'] == "console"){
                     $sql .= " ORDER BY game.console";
+                    $_SESSION['filter']="filter=console";
                 }
                 if ($_GET['filter'] == "developer"){
                     $sql .= " ORDER BY dev.developer";
+                    $_SESSION['filter']="filter=developer";
                 }
                 if ($_GET['filter'] == "publisher"){
                     $sql .= " ORDER BY pub.publisher";
+                    $_SESSION['filter']="filter=publisher";
                 }
                 
                 if ($_GET['sortBy'] == "asc"){
@@ -50,7 +77,6 @@ session_start();
         else {
             $sql .= " ORDER BY name";
         }
-            
         $statement = $conn->prepare($sql);
         $statement->execute();
         $games = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -125,6 +151,12 @@ session_start();
         <form action='shoppingCart.php'>
                 <input type='submit' value='Shopping Cart'>
         </form>
+        
+        <form action='refresh.php'>
+                <input type='submit' value='Start New Session'>
+        </form>
+        
+        
         
     </body>
 </html>
