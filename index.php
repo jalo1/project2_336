@@ -15,16 +15,9 @@ session_start();
                 JOIN gp2_developer dev 
                 ON pub.sID = dev.dID";
                 
-        if (isset($_GET['submit'])){
+        if (($_GET['submit'])){
             
-            if ($_GET['sortBy']=="asc"){
-                $sql .= " ORDER BY price";
-            }
-            else if ($_GET['sortBy']=="desc") {
-                $sql .= " ORDER BY game.price DESC";
-            }
-            
-            else if (isset($_GET['filter'])) {
+            if (!empty($_GET['filter'])) {
                 if ($_GET['filter'] == "console"){
                     $sql .= " ORDER BY game.console";
                 }
@@ -34,7 +27,22 @@ session_start();
                 if ($_GET['filter'] == "publisher"){
                     $sql .= " ORDER BY pub.publisher";
                 }
+                
+                if ($_GET['sortBy'] == "asc"){
+                    $sql .= ", price";
+                }
+                if ($_GET['sortBy'] == "desc"){
+                    $sql .= ", price DESC";
+                }
             }
+            
+            else if ($_GET['sortBy']=="asc"){
+                $sql .= " ORDER BY game.price";
+            }
+            else if ($_GET['sortBy']=="desc") {
+                $sql .= " ORDER BY price DESC";
+            }
+            
             else {
                 $sql .= " ORDER BY name";
             }
@@ -71,11 +79,11 @@ session_start();
              <label for="desc">Decending</label>
             </br>
             Filter by: 
-            <select name="filter">
+            <select id=filter name="filter">
                 <option value=""> Select One </option>
-                <option value="console">Console</option>
-                <option value="developer">Developer</option>
-                <option value="publisher">Publisher</option>
+                <option value="console"  <?php if ($_GET['filter'] == "console" ) echo 'selected' ; ?>>Console</option>
+                <option value="publisher"  <?php if ($_GET['filter'] == "publisher" ) echo 'selected' ; ?>>Publisher</option>
+                <option value="developer" <?php if ($_GET['filter'] == "developer" ) echo 'selected' ; ?>>Developer</option>
             </select>
              
             <input type="submit" value="Search" name="submit" />
