@@ -1,17 +1,17 @@
 <?php
 session_start();
-
-
 function displayGameInfo() {
     
     include 'dbConnections.php';
     $conn = getDatabaseConnection();
-
     $sql = "SELECT * 
-            FROM gp2_game a 
-            JOIN gp2_published b 
-            ON a.vgID = b.vgID 
-            WHERE a.vgID = :vgId";
+            FROM gp2_game g 
+            JOIN gp2_published p 
+            ON g.vgID = p.vgID 
+            JOIN gp2_developer d 
+            ON p.sID = d.dID
+            WHERE g.vgID = :vgId";
+            
     
     $namedParam = array(":vgId"=>$_GET['vgID']);
     
@@ -19,17 +19,18 @@ function displayGameInfo() {
     $stmt->execute($namedParam);
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
+    // Displays game informations
     foreach ($records as $record) {
-        echo "Name: ". $record['name'] .
+        echo "Name: ". ucwords($record['name']) .
         "<br/>Price: ". $record['price'].
         "<br/>Year: ".  $record['year'] . 
-        "<br/>Console: " . $record['console'] . 
+        "<br/>Console: " . ucwords($record['console']) . 
         "<br/>MetaCritic Score: " . $record['metacritic'] . 
-        "<br/>Publisher: " . $record['publisher']. "<br/>";
+        "<br/>Publisher: " . ucwords($record['publisher']). 
+        "<br/>Developer: " . ucwords($record['developer']) . "<br/>";
     }
     
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +41,7 @@ function displayGameInfo() {
     <body>
         <h2> Game Information </h2>
         <?=displayGameInfo()?>
-        
-        <form action='index.php'>
+        <form action='back.php'>
                 <input type='submit' value='Back'>
         </form>
     </body>

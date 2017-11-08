@@ -24,8 +24,10 @@ function displayCart() {
         <h2> Shopping Cart </h2>
         <?=displayCart()?>
         
-        
-        <form action='index.php'>
+        <form action ='clear.php'>
+            <input type='submit' value = 'Clear'>
+       </form>
+        <form action='back.php'>
                 <input type='submit' value='Back'>
         </form>
     </body>
