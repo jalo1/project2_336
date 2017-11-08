@@ -54,11 +54,23 @@ session_start();
 <html>
     <head>
         <title>Team Project</title>
+       
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         <link href="css/styles.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
+        <div id = 'wrapper'>
+        <div id = 'mario'>
+       <a href="https://fontmeme.com/new-super-mario-bros-wii-font/"><img src="https://fontmeme.com/permalink/171108/735136f2d3010640743b73d15e0b752f.png" alt="new-super-mario-bros-wii-font" border="0"></a>
+       </div>
+       
+        <div id = 'sButton'> 
+        <form action='shoppingCart.php'>
+                <input type='submit' class = 'button' value='Shopping Cart'>
+        </form>
+        </div>
         
-        <h1>Game Store</h1>
+        <div id = 'upper'>
         <form>
             Order by Price:
             <input type="radio" name="sortBy" id="asc" value="asc"
@@ -78,12 +90,14 @@ session_start();
                 <option value="publisher">Publisher</option>
             </select>
              
-            <input type="submit" value="Search" name="submit" />
+            <input type="submit" class = "button" value="Search" name="submit" />
         </form>
+        </div>
  
  
         <?php
         $games = displayGames();
+        echo "<div id = 'table'>";
         echo "<table>";
         echo "<tr>
                 <th>Game</th>
@@ -106,17 +120,16 @@ session_start();
             echo "<td>".ucwords($g['price'])."</td>";
             echo "<td><form action='addToCart.php' style='display:inline'>
                     <input type='hidden' name='vgID' value='".$g['vgID']."'/>
-                    <input type='submit' value='Add to Cart'>
+                    <input type='submit' class = 'button' value='Add to Cart'>
                   </form></td>";
             echo "</tr>";
         }
         
         echo "</table>";
+        echo "</div>";
         ?>
         
-        <form action='shoppingCart.php'>
-                <input type='submit' value='Shopping Cart'>
-        </form>
-        
+       
+        </div>
     </body>
 </html>
